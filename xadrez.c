@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-// Estrutura genérica para peças lineares (Bispo, Torre, Rainha)
+// Estrutura para peças lineares (Bispo, Torre, Rainha)
 typedef struct {
     char nome[20];
     int movimentos;
