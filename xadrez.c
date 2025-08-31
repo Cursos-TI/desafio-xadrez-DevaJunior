@@ -5,7 +5,7 @@ typedef struct {
     char nome[20];
     int movimentos;
     char direcao1[20];
-    char direcao2[20]; // usado em movimentos diagonais
+    char direcao2[20]; // Usado em movimentos diagonais
 } Peca;
 
 // Estrutura específica para o Cavalo
@@ -32,44 +32,43 @@ int main() {
 
     printf("=== Nível Aventureiro - Movimentação das Peças ===\n\n");
 
-    // Bispo
+    // Bispo: 5 casas em diagonal sup. direita
     printf("%s:\n", bispo.nome);
     for (int i = 0; i < bispo.movimentos; i++) {
-        printf("%s\n", bispo.direcao1);
-        printf("%s\n", bispo.direcao2);
+        printf("%s\n", bispo.direcao1); // "Cima"
+        printf("%s\n", bispo.direcao2); // "Direita"
     }
     printf("\n");
 
-    // Torre
+    // Torre: 5 casas para direita
     printf("%s:\n", torre.nome);
     int j = 0;
     while (j < torre.movimentos) {
-        printf("%s\n", torre.direcao1);
+        printf("%s\n", torre.direcao1); // "Direita"
         j++;
     }
     printf("\n");
 
-    // Rainha
+    // Rainha: 8 casas para esquerda
     printf("%s:\n", rainha.nome);
     int k = 0;
     do {
-        printf("%s\n", rainha.direcao1);
+        printf("%s\n", rainha.direcao1); // "Esquerda"
         k++;
     } while (k < rainha.movimentos);
     printf("\n");
 
-    // Cavalo
+    // Cavalo: Movimento em L
     printf("%s:\n", cavalo.nome);
 
     /* Movimento em L:
-      - 2 casas para baixo
-      - 1 casa para a esquerda
-     Usando loops aninhados (for + while) */
-
+       - 2 casas para baixo
+       - 1 casa para a esquerda
+    */
     for (int i = 0; i < cavalo.movBaixo; i++) {
         printf("Baixo\n");
 
-        // Último movimento "para baixo" é executado a esquerda
+        // Ao terminar de descer, move para a esquerda
         if (i == cavalo.movBaixo - 1) {
             int m = 0;
             while (m < cavalo.movEsquerda) {
@@ -78,6 +77,8 @@ int main() {
             }
         }
     }
+
+    printf("\n=== Fim do Nível Aventureiro ===\n");
 
     return 0;
 }
