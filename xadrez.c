@@ -15,6 +15,48 @@ typedef struct {
     int movEsquerda;
 } Cavalo;
 
+// Função: Movimentos lineares
+void moverLinear(Peca peca) {
+    printf("%s:\n", peca.nome);
+    
+    if (strcmp(peca.nome, "Bispo") == 0) {
+        for (int i = 0; i < peca.movimentos; i++) {
+            printf("%s\n", peca.direcao1);
+            printf("%s\n", peca.direcao2);
+        }
+    } else if (strcmp(peca.nome, "Torre") == 0) {
+        int j = 0;
+        while (j < peca.movimentos) {
+            printf("%s\n", peca.direcao1);
+            j++;
+        }
+    } else if (strcmp(peca.nome, "Rainha") == 0) {
+        int k = 0;
+        do {
+            printf("%s\n", peca.direcao1);
+            k++;
+        } while (k < peca.movimentos);
+    }
+    printf("\n");
+}
+
+// Função: Movimento em L (cavalo)
+void moverCavalo(Cavalo cavalo) {
+    printf("%s:\n", cavalo.nome);
+    for (int i = 0; i < cavalo.movBaixo; i++) {
+        printf("Baixo\n");
+
+        if (i == cavalo.movBaixo - 1) {
+            int m = 0;
+            while (m < cavalo.movEsquerda) {
+                printf("Esquerda\n");
+                m++;
+            }
+        }
+    }
+    printf("\n");
+}
+
 int main() {
 
     // Constantes para os movimentos
@@ -30,55 +72,37 @@ int main() {
     Peca rainha = {"Rainha", RAINHA_MOV, "Esquerda", ""};
     Cavalo cavalo = {"Cavalo", CAVALO_BAIXO, CAVALO_ESQUERDA};
 
-    printf("=== Nível Aventureiro - Movimentação das Peças ===\n\n");
+    printf("=== Nível Mestre - Movimentação das Peças ===\n\n");
 
-    // Bispo: 5 casas em diagonal sup. direita
-    printf("%s:\n", bispo.nome);
-    for (int i = 0; i < bispo.movimentos; i++) {
-        printf("%s\n", bispo.direcao1); // "Cima"
-        printf("%s\n", bispo.direcao2); // "Direita"
-    }
-    printf("\n");
-
-    // Torre: 5 casas para direita
-    printf("%s:\n", torre.nome);
-    int j = 0;
-    while (j < torre.movimentos) {
-        printf("%s\n", torre.direcao1); // "Direita"
-        j++;
-    }
-    printf("\n");
-
-    // Rainha: 8 casas para esquerda
-    printf("%s:\n", rainha.nome);
-    int k = 0;
+    int escolha;
     do {
-        printf("%s\n", rainha.direcao1); // "Esquerda"
-        k++;
-    } while (k < rainha.movimentos);
-    printf("\n");
+        printf("Escolha uma peça para movimentar:\n");
+        printf("1 - Bispo\n2 - Torre\n3 - Rainha\n4 - Cavalo\n0 - Sair\n");
+        printf("Opção: ");
+        scanf("%d", &escolha);
 
-    // Cavalo: Movimento em L
-    printf("%s:\n", cavalo.nome);
-
-    /* Movimento em L:
-       - 2 casas para baixo
-       - 1 casa para a esquerda
-    */
-    for (int i = 0; i < cavalo.movBaixo; i++) {
-        printf("Baixo\n");
-
-        // Ao terminar de descer, move para a esquerda
-        if (i == cavalo.movBaixo - 1) {
-            int m = 0;
-            while (m < cavalo.movEsquerda) {
-                printf("Esquerda\n");
-                m++;
-            }
+        switch (escolha) {
+            case 1:
+                moverLinear(bispo);
+                break;
+            case 2:
+                moverLinear(torre);
+                break;
+            case 3:
+                moverLinear(rainha);
+                break;
+            case 4:
+                moverCavalo(cavalo);
+                break;
+            case 0:
+                printf("Saindo do jogo...\n");
+                break;
+            default:
+                printf("Opção inválida!\n\n");
         }
-    }
+    } while (escolha != 0);
 
-    printf("\n=== Fim do Nível Aventureiro ===\n");
+    printf("\n=== Fim do Nível Mestre ===\n");
 
     return 0;
 }
